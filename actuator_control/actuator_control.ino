@@ -54,7 +54,7 @@ void setup() {
 void initialRun(){
   currDirection_ = INIT_DIRECTION;
   currDirection = INIT_DIRECTION;
-  stepper.setCurrentPosition(0);
+  stepper.setCurrentPosition(0);        //Sets the current position as the 0 position arbitrarily. Will be reset during calibration sequence.
   stepper.moveTo(INIT_DIRECTION*ACTUATOR_CALIBRATE);
 }
 
@@ -69,7 +69,7 @@ void loop() {
   /* Actuator Calibration */
   if(bottomTrigVal==false && currDirection==DOWN_DIR){
     currDirection_ = UP_DIR;
-    stepper.setCurrentPosition(0);              //Sets the current position as the 0 position arbitrarily. Will be reset during calibration sequence.
+    stepper.setCurrentPosition(0);                //Sets the bottom switch as the bottom or 0 position         
     stepper.moveTo(ACTUATOR_CALIBRATE);
     delay(BOTTOM_WAIT);
     stepper.run();
@@ -77,8 +77,8 @@ void loop() {
   /* Actuator Calibration */
   else if(topTrigVal==false && currDirection==UP_DIR){
     currDirection_ = DOWN_DIR;
-    topmostPosition = stepper.currentPosition();
-    stepper.moveTo(INCH);                       //One inch above 0 position
+    topmostPosition = stepper.currentPosition();  //Sets the top switch as the topmost position
+    stepper.moveTo(INCH);                         //One inch above 0 position
     delay(TOP_WAIT);
     stepper.run();
   }
