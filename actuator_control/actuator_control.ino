@@ -7,17 +7,17 @@
 #define TOP_TRIGGER     23
 
 /* SPEED PARAMETERS */
-#define MAXSPEED     5000  // steps per second
-#define ACCELERATION 4000  // steps per second per second
+#define MAXSPEED     1500  // steps per second
+#define ACCELERATION 2000  // steps per second per second
 
 /* HOLD TIMES */
 #define TOP_WAIT            3000    //millisceonds
-#define BOTTOM_WAIT         3000    //milliseconds
+#define BOTTOM_WAIT         8000    //milliseconds
 
 /* OTHER MAGIC NUMBERS */
 #define START_DELAY         1000
-#define ACTUATOR_CALIBRATE  110000  //Distance beyond actual actuator length for calibration purposes 
-#define INCH                3000    //Approx 3000 steps per inch
+#define ACTUATOR_CALIBRATE  98000  //Distance beyond actual actuator length for calibration purposes 
+#define INCH                1000    //Approx 3000 steps per inch
 #define INIT_DIRECTION      -1      //-1 is DOWN, 1 is UP
 #define UP_DIR              1
 #define DOWN_DIR            -1
@@ -27,8 +27,8 @@ int currDirection_; //flag for next direction state next state
 long topmostPosition = ACTUATOR_CALIBRATE;
 
 /* SPDT sensors are active LOW */
-bool bottomTrigVal;
-bool topTrigVal;
+bool bottomTrigVal = true;
+bool topTrigVal = true;
 
 AccelStepper stepper(1, PUL, DIR);  //AccelStepper constructor
 
@@ -61,7 +61,6 @@ void initialRun(){
 void checkSwitch(){
   bottomTrigVal = digitalRead(BOTTOM_TRIGGER);
   topTrigVal = digitalRead(TOP_TRIGGER);
-
 }
 
 void loop() {
@@ -73,6 +72,7 @@ void loop() {
     stepper.moveTo(ACTUATOR_CALIBRATE);
     delay(BOTTOM_WAIT);
     stepper.run();
+    //Serial.print("Going up\n");
   }
   /* Actuator Calibration */
   else if(topTrigVal==false && currDirection==UP_DIR){
