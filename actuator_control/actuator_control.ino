@@ -33,8 +33,6 @@ bool topTrigVal = true;
 AccelStepper stepper(1, PUL, DIR);  //AccelStepper constructor
 
 void setup() {
-  //Serial.begin(9600);
-
   /* pin declarations */
   pinMode(PUL, OUTPUT);
   pinMode(DIR, OUTPUT);
@@ -72,7 +70,6 @@ void loop() {
     stepper.moveTo(ACTUATOR_CALIBRATE);
     delay(BOTTOM_WAIT);
     stepper.run();
-    //Serial.print("Going up\n");
   }
   /* Actuator Calibration */
   else if(topTrigVal==false && currDirection==UP_DIR){
