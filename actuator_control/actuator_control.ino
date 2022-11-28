@@ -71,7 +71,7 @@ void loop() {
   /* Actuator Calibration */
   if(bottomTrigVal==false && currDirection==DOWN_DIR){
     currPosition = stepper.currentPosition();
-    if(currPosition <= 3000){
+    if(currPosition <= 3*INCH){
       // Serial.print("Bottom switch active, going up\n");
       // Serial.print("bottomTrigVal ");
       // Serial.print(bottomTrigVal);
