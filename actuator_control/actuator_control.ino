@@ -35,7 +35,7 @@ bool topTrigVal = true;
 AccelStepper stepper(1, PUL, DIR);  //AccelStepper constructor
 
 void setup() {
-  Serial.begin(9600);
+  //Serial.begin(9600);
 
   /* pin declarations */
   pinMode(PUL, OUTPUT);
@@ -54,7 +54,7 @@ void setup() {
 
 /* run calibration sequence at power cycle */
 void initialRun(){
-  Serial.print("Starting calibration\n");
+  // Serial.print("Starting calibration\n");
   currDirection_ = INIT_DIRECTION;
   currDirection = INIT_DIRECTION;
   stepper.setCurrentPosition(0);        //Sets the current position as the 0 position arbitrarily. Will be reset during calibration sequence.
@@ -72,13 +72,13 @@ void loop() {
   if(bottomTrigVal==false && currDirection==DOWN_DIR){
     currPosition = stepper.currentPosition();
     if(currPosition <= 3000){
-      Serial.print("Bottom switch active, going up\n");
-      Serial.print("bottomTrigVal ");
-      Serial.print(bottomTrigVal);
-      Serial.print("\n");
-      Serial.print("current position ");
-      Serial.print(stepper.currentPosition());
-      Serial.print("\n");
+      // Serial.print("Bottom switch active, going up\n");
+      // Serial.print("bottomTrigVal ");
+      // Serial.print(bottomTrigVal);
+      // Serial.print("\n");
+      // Serial.print("current position ");
+      // Serial.print(stepper.currentPosition());
+      // Serial.print("\n");
       currDirection_ = UP_DIR;
       stepper.setCurrentPosition(0);                //Sets the bottom switch as the bottom or 0 position         
       stepper.moveTo(ACTUATOR_CALIBRATE-INCH);
@@ -88,10 +88,10 @@ void loop() {
     else if(stepper.distanceToGo()==0){
       //if at top go down
       if(currDirection==UP_DIR){
-        Serial.print("Reached top, going down\n");
-        Serial.print("current position ");
-        Serial.print(stepper.currentPosition());
-        Serial.print("\n");
+        // Serial.print("Reached top, going down\n");
+        // Serial.print("current position ");
+        // Serial.print(stepper.currentPosition());
+        // Serial.print("\n");
         currDirection_ = DOWN_DIR;
         stepper.moveTo(2*INCH);
         delay(TOP_WAIT);
@@ -99,10 +99,10 @@ void loop() {
       }
       //if at bottom go up
       else if(currDirection==DOWN_DIR){
-        Serial.print("Reached bottom, going up\n");
-        Serial.print("current position ");
-        Serial.print(stepper.currentPosition());
-        Serial.print("\n");
+        // Serial.print("Reached bottom, going up\n");
+        // Serial.print("current position ");
+        // Serial.print(stepper.currentPosition());
+        // Serial.print("\n");
         currDirection_ = UP_DIR;
         stepper.moveTo(topmostPosition-INCH);   //One inch below topmost position
         delay(BOTTOM_WAIT);
@@ -133,10 +133,10 @@ void loop() {
   else if(stepper.distanceToGo()==0){
     //if at top go down
     if(currDirection==UP_DIR){
-      Serial.print("Reached top, going down\n");
-      Serial.print("current position ");
-      Serial.print(stepper.currentPosition());
-      Serial.print("\n");
+      // Serial.print("Reached top, going down\n");
+      // Serial.print("current position ");
+      // Serial.print(stepper.currentPosition());
+      // Serial.print("\n");
       currDirection_ = DOWN_DIR;
       stepper.moveTo(2*INCH);
       delay(TOP_WAIT);
@@ -144,10 +144,10 @@ void loop() {
     }
     //if at bottom go up
     else if(currDirection==DOWN_DIR){
-      Serial.print("Reached bottom, going up\n");
-      Serial.print("current position ");
-      Serial.print(stepper.currentPosition());
-      Serial.print("\n");
+      // Serial.print("Reached bottom, going up\n");
+      // Serial.print("current position ");
+      // Serial.print(stepper.currentPosition());
+      // Serial.print("\n");
       currDirection_ = UP_DIR;
       stepper.moveTo(topmostPosition-INCH);   //One inch below topmost position
       delay(BOTTOM_WAIT);
